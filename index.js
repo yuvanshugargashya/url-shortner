@@ -7,7 +7,7 @@ const URL = require('./models/url');
 const app = express();
 const port = 8001;
 
-connectToMongoDB('mongodb://localhost:27017/shorturl').then( ()=>
+connectToMongoDB('mongodb+srv://yuvanshugargashya:%40Smileyuvi52@cluster0.3i4nmkr.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp').then( ()=> //mongodb://localhost:27017/shorturl
 console.log("mongodb connected"));
 
 app.set("view engine", "ejs");
