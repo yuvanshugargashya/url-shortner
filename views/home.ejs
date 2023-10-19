@@ -6,25 +6,27 @@
     <title>Home page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     
+    
 </head>
-<body>
-    <h1>URL shortner</h1>
+<body class="p-3 mb-2 bg-light text-dark">
+    <h1 class="d-flex justify-content-center">URL shortner</h1>
     <% if (locals.id) { %>
         <p> URL generated:  http://yuvanshu-urls.vercel.app/<%= id %></p>
      
     <% } %>
-    <div>
+    <div class="d-flex justify-content-center">
         <form method = "POST" action = "/url">
             <label>Enter your orignal url</label>
             <input type = "text" name = "url" placeholder="https://abc.com"/>
-            <button type = "submit">generate</button>
+            <button type = "submit" class="btn btn-primary">Generate</button>
 
         </form>
         
     </div>
+    <br><br>
     <div>
         <% if (locals.urls) { %>
-            <table >
+            <table class="table table-dark">
                 <thead>
                     <th>S. no.</th>
                     <th>gotolink</th>
@@ -61,7 +63,8 @@
         <h1>QR Code Generator</h1>
         
         <form action="/scan" method="POST" class="form">
-            <textarea name="text" id="text" cols="150" rows="10" placeholder="Enter URL or Text" required></textarea>
+            <textarea  name="text" id="text" cols="150" rows="10" placeholder="Enter URL or Text" required></textarea>
+            <br>
             <button type="submit" class="btn btn-primary">Generate QR Code</button>
 
         </form>
