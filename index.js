@@ -1,4 +1,5 @@
 const express = require("express");
+const qrcode = require("qrcode");
 const path = require('path');
 const {connectToMongoDB} = require('./connect');
 const urlRoute = require('./routes/url');
@@ -38,10 +39,20 @@ app.get('/:shortId' , async (req, res) =>{
     },
 });
 
+
 res.redirect(entry.redirectURL);
 
 })
 
+app.post("/scan", (req, res, next) => {
+    const input_text = req.body.text;
+    qrcode.toDataURL(input_text, (err, src) => {
+      if (err) res.send("Something went wrong!!");
+      res.render("scan", {
+        qr_code: src,
+      });
+    });
+  });
 
 
 

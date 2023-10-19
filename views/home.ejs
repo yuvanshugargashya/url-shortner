@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home page</title>
+    
 </head>
 <body>
     <h1>URL shortner</h1>
@@ -16,7 +17,9 @@
             <label>Enter your orignal url</label>
             <input type = "text" name = "url" placeholder="https://abc.com"/>
             <button type = "submit">generate</button>
+
         </form>
+        
     </div>
     <div>
         <% if (locals.urls) { %>
@@ -28,6 +31,7 @@
                     <th>Shortid</th>
                     <th>redirect</th>
                     <th>clicks</th>
+                    
                 </thead>
                 
                 <tbody>
@@ -42,6 +46,7 @@
                         
                         <td><%= url.redirectURL %></td>
                         <td><%= url.visitHistory.length %></td>
+                        
                     </tr>
                      
                     <% }) %>
@@ -50,5 +55,14 @@
          
         <% } %>
     </div>
+    <hr>
+    <div class="container">
+        <h1>QR Code Generator</h1>
+        
+        <form action="/scan" method="POST" class="form">
+            <textarea name="text" id="text" cols="150" rows="10" placeholder="Enter URL or Text" required></textarea>
+            <button type="submit" class="btn btn-primary">Generate QR Code</button>
+
+        </form>
 </body>
 </html>
