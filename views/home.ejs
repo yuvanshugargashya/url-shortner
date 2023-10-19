@@ -9,7 +9,9 @@
     
 </head>
 <body class="p-3 mb-2 bg-light text-dark">
-    <h1 class="d-flex justify-content-center">URL shortner</h1>
+    <h1 class="d-flex justify-content-center">URL shortner/ <a href = "/qr">QR generator</a></h1>
+    
+    
     <h5 class="d-flex justify-content-center">(Hii welcome to the url shortner and qr-code generator service feel free to use this tool. Happy journey !!)</h5>
     <% if (locals.id) { %>
         <p> URL generated:  http://yuvanshu-urls.vercel.app/<%= id %></p>
@@ -87,14 +89,7 @@
     </div>
     <hr>
     <div class="container">
-        <h1>QR Code Generator</h1>
         
-        <form action="/scan" method="POST" class="form">
-            <textarea  name="text" id="text" cols="150" rows="10" placeholder="Enter URL or Text" required></textarea>
-            <br>
-            <button type="submit" class="btn btn-primary">Generate QR Code</button>
-
-        </form>
         <br><br><br><br><br><br><br><br>
 
         <div class="card text-center">

@@ -9,4 +9,10 @@ router.get('/' , async (req,res) => {
     });
 });
 
+router.get('/qr' , async (req,res) => {
+    
+    return res.render("qr" 
+    );
+});
+
 module.exports = router;
