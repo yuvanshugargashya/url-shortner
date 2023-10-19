@@ -1,6 +1,7 @@
 const express = require("express");
 const qrcode = require("qrcode");
 const path = require('path');
+const {handleGenerateNewShortURLmanual} = require('./controllers/url.js');
 const {connectToMongoDB} = require('./connect');
 const urlRoute = require('./routes/url');
 const staticRoute = require('./routes/staticRouter');
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ extended: false}));
 
 
 app.use('/url' , urlRoute);
+app.post('/urlmanual' , handleGenerateNewShortURLmanual);
 app.use('/' , staticRoute);
 app.get('/:shortId' , async (req, res) =>{
     const shortId = req.params.shortId;

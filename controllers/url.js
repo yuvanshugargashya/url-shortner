@@ -20,6 +20,40 @@ async function handleGenerateNewShortURL(req , res){
 
 
 }
+
+//
+async function handleGenerateNewShortURLmanual(req , res){
+    try{
+    const body = req.body;
+    if(!body.url) return res.status(400).json({error: 'url is required'});
+    
+    const isexi2 = await URL.findOne({shortId: req.body.shortId});
+    if(isexi2){
+        throw new Error('already there');
+    }
+    
+
+    
+    await URL.create({
+        shortId: body.myid,
+        redirectURL: body.url,
+        visitHistory: [],
+    });
+
+    return res.render("home" , {
+        id: req.body.myid,
+    })
+}
+
+    catch(error){
+        return res.status(500).json(error.message)
+    }
+
+    
+
+
+
+}
 async function handleGetAnalytics(req , res){
     const shortId = req.params.shortId;
     const result = await URL.findOne({shortId});
@@ -28,5 +62,6 @@ async function handleGetAnalytics(req , res){
 module.exports = {
     handleGenerateNewShortURL,
     handleGetAnalytics,
+    handleGenerateNewShortURLmanual,
 
 };
