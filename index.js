@@ -1,10 +1,13 @@
 const express = require("express");
 const qrcode = require("qrcode");
 const path = require('path');
+const cookieParser = require("cookie-parser");
 const {handleGenerateNewShortURLmanual} = require('./controllers/url.js');
 const {connectToMongoDB} = require('./connect');
 const urlRoute = require('./routes/url');
 const staticRoute = require('./routes/staticRouter');
+const userRoute = require("./routes/user");
+const { restrictToLoggedinUserOnly, checkAuth } = require("./middlewares/auth");
 const URL = require('./models/url');
 const app = express();
 const port = 8001;
@@ -20,15 +23,17 @@ app.set("views" , path.resolve("./views"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
+app.use(cookieParser());
 
 
 
 
 
 
-app.use('/url' , urlRoute);
-app.post('/urlmanual' , handleGenerateNewShortURLmanual);
-app.use('/' , staticRoute);
+app.use('/url', restrictToLoggedinUserOnly , urlRoute);
+app.use("/user", userRoute);
+app.post('/urlmanual', restrictToLoggedinUserOnly , handleGenerateNewShortURLmanual);
+app.use('/', checkAuth , staticRoute);
 app.get('/:shortId' , async (req, res) =>{
     const shortId = req.params.shortId;
 
